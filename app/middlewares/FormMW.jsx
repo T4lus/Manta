@@ -1,6 +1,7 @@
 // Node Libs
 const appConfig = require('electron').remote.require('electron-settings');
 import uuidv4 from 'uuid/v4';
+const ipc = require('electron').ipcRenderer;
 import i18n from '../../i18n/i18n';
 
 // Actions Verbs
@@ -40,6 +41,28 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       }
       // Clear The Form
       dispatch(FormActions.clearForm(null, true));
+      break;
+    }
+
+    case ACTION_TYPES.FORM_PREVIEW: {
+      const currentFormData = getState().form;
+      // Validate Form Data
+      if (!validateFormData(currentFormData)) return;
+      const currentInvoiceData = getInvoiceData(currentFormData);
+      // UPDATE DOC
+      if (currentFormData.settings.editMode.active) {
+        // Update existing invoice
+        dispatch(InvoicesActions.updateInvoice(currentInvoiceData));
+      } else {
+        // CREATE DOC
+        dispatch(InvoicesActions.saveInvoice(currentInvoiceData));
+      }
+      // Save Contact to DB if it's a new one
+      if (currentFormData.recipient.newRecipient) {
+        const newContactData = currentInvoiceData.recipient;
+        dispatch(ContactsActions.saveContact(newContactData));
+      }
+      ipc.send('preview-invoice', currentInvoiceData);
       break;
     }
 
