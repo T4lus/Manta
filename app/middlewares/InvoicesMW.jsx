@@ -4,6 +4,10 @@ import currencies from '../../libs/currencies.json';
 const appConfig = require('electron').remote.require('electron-settings');
 const ipc = require('electron').ipcRenderer;
 import i18n from '../../i18n/i18n';
+const moment = require('moment');
+
+//Helper
+import { zeroFill } from '../../helpers/formatNumber';
 
 // Actions & Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -66,7 +70,7 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
             },
           });
           // Preview Window
-          ipc.send('preview-invoice', action.payload);
+          // ipc.send('preview-invoice', action.payload);
         })
         .catch(err => {
           next({
@@ -141,6 +145,7 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
     case ACTION_TYPES.INVOICE_DUPLICATE: {
       const duplicateInvoice = Object.assign({}, action.payload, {
         created_at: Date.now(),
+        status: 'draft',
         _id: uuidv4(),
         _rev: null,
       })
@@ -200,10 +205,18 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
       const { invoiceID, status } = action.payload;
       return getSingleDoc('invoices', invoiceID)
         .then(doc => {
-          dispatch({
-            type: ACTION_TYPES.INVOICE_UPDATE,
-            payload: Object.assign({}, doc, { status })
-          })
+          getAllDocs('invoices').then(allDocs => {
+            let invoiceID = doc.status == 'draft' ? zeroFill(allDocs.filter(invoice => invoice.status != 'draft').length + 1, appConfig.getSync('invoice.invoiceID.padding')) : doc.invoiceID;
+            invoiceID = appConfig.getSync('invoice.invoiceID.prefix') != 'none' ? moment(Date.now()).format(appConfig.getSync('invoice.invoiceID.prefix')) + invoiceID : invoiceID;
+            dispatch({
+              type: ACTION_TYPES.INVOICE_UPDATE,
+              payload: Object.assign({}, doc, {
+                invoiceID: invoiceID,
+                status: status 
+              })
+            })
+
+          });
         })
         .catch(err => {
           next({
