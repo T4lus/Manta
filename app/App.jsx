@@ -39,6 +39,9 @@ class App extends PureComponent {
     ipc.on('menu-form-save', () => {
       dispatch(FormActions.saveFormData());
     });
+    ipc.on('menu-form-preview', () => {
+      dispatch(FormActions.previewFormData());
+    });
     ipc.on('menu-form-clear', () => {
       dispatch(FormActions.clearForm());
     });
@@ -73,6 +76,7 @@ class App extends PureComponent {
     ipc.removeAllListeners([
       'menu-change-tab',
       'menu-form-save',
+      'menu-form-preview',
       'menu-form-clear',
       'menu-form-add-item',
       'menu-form-toggle-dueDate',

@@ -10,6 +10,12 @@
       "name": "Logo",
       "hint": "Accepte PNG, JPG & SVG (Recommandé)"
     },
+    "invoiceIdSettings" : "Paramètres des numéros de facture",
+    "invoiceID" : {
+      "padding" : "Zéro non significatif",
+      "prefix" : "Préfixe",
+      "noPrefix": "Aucun préfixe"
+    },
     "taxSettings": "Paramètres des Taxes",
     "template": "Modèle",
     "dateFormat": "Format de la Date",
@@ -35,28 +41,8 @@
     "openPDFReader": "Ouvrir le fichier PDF après la sauvegarde",
     "language": {
       "name": "Langue",
-      "cs": "Tchèque",
-      "da": "Danois",
-      "de": "Allemand",
-      "el": "Grec",
       "en": "Anglais",
-      "esES": "Espagnol",
-      "fr": "Français",
-      "id": "Indonésien",
-      "it": "Italien",
-      "ja": "Japonais",
-      "ko": "Coréen",
-      "lt": "Lituanien",
-      "nl": "Néerlandais",
-      "ptBR": "Portugais (Brésil)",
-      "ptPT": "Portugais",
-      "ru": "Russe",
-      "th": "Thaï",
-      "tl": "Tagalog, Philippines",
-      "tr": "Turc",
-      "vi": "Vietnamien",
-      "zh-CN": "Chinois (Simplifié)",
-      "zh-TW": "Chinois (Traditionnel)"
+      "fr": "Français"
     },
     "other": "Autre"
   }

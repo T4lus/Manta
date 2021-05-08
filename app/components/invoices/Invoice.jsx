@@ -39,10 +39,11 @@ const StatusBar = styled.div`
   width: 100%;
   height: 6px;
   border-radius: 4px 4px 0 0;
-  ${props => props.status === 'pending' && `background: #469FE5;`} ${props =>
-      props.status === 'paid' && `background: #6BBB69;`} ${props =>
-      props.status === 'refunded' && `background: #4F555C;`} ${props =>
-      props.status === 'cancelled' && `background: #EC476E;`};
+  ${props => props.status === 'draft' && `background: #ffc107;`}
+  ${props => props.status === 'pending' && `background: #469FE5;`} 
+  ${props => props.status === 'paid' && `background: #6BBB69;`} 
+  ${props => props.status === 'refunded' && `background: #4F555C;`} 
+  ${props => props.status === 'cancelled' && `background: #EC476E;`};
 `;
 
 const Status = styled.div`
@@ -50,10 +51,12 @@ const Status = styled.div`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.status === 'pending' && `color: #469FE5;`} ${props =>
-      props.status === 'paid' && `color: #6BBB69;`} ${props =>
-      props.status === 'refunded' && `color: #4F555C;`} ${props =>
-      props.status === 'cancelled' && `color: #EC476E;`} span {
+  ${props => props.status === 'draft' && `color: #ffc107;`} 
+  ${props => props.status === 'pending' && `color: #469FE5;`} 
+  ${props => props.status === 'paid' && `color: #6BBB69;`} 
+  ${props => props.status === 'refunded' && `color: #4F555C;`} 
+  ${props => props.status === 'cancelled' && `color: #EC476E;`} 
+  span {
     display: flex;
     align-items: center;
     i {
@@ -221,11 +224,19 @@ class Invoice extends PureComponent {
           </span>
         );
       }
-      default: {
+      case 'pending': {
         return (
           <span>
             <i className="ion-loop" />
             {t('invoices:status:pending')}
+          </span>
+        );
+      }
+      default: {
+        return (
+          <span>
+            <i className="ion-android-create" />
+            {t('invoices:status:draft')}
           </span>
         );
       }
@@ -257,8 +268,8 @@ class Invoice extends PureComponent {
     const dateFormat = invoice.configs ? invoice.configs.dateFormat : this.props.dateFormat;
     const statusActions = [
       {
-        label: t('invoices:status:pending'),
-        action: () => setInvoiceStatus(invoice._id, 'pending'),
+        label: t('invoices:status:paid'),
+        action: () => setInvoiceStatus(invoice._id, 'paid'),
       },
       {
         label: t('invoices:status:refunded'),
@@ -280,9 +291,11 @@ class Invoice extends PureComponent {
               <Button link onClick={this.duplicateInvoice}>
                 <i className="ion-ios-copy" />
               </Button>
-              <Button link onClick={this.deleteInvoice}>
-                <i className="ion-trash-a" />
-              </Button>
+              {invoice.status == 'draft' && (
+                <Button link onClick={this.deleteInvoice}>
+                  <i className="ion-trash-a" />
+                </Button>
+              )}
             </ButtonsGroup>
           </Header>
           <Body>
@@ -296,12 +309,7 @@ class Invoice extends PureComponent {
               <Field>
                 <label>{t('invoices:fields:invoiceID')}</label>
                 <p>
-                  {invoice.invoiceID
-                    ? invoice.invoiceID
-                    : truncate(invoice._id, {
-                        length: 8,
-                        omission: '',
-                      })}
+                  {invoice.invoiceID ? invoice.invoiceID : truncate(invoice._id, {length: 8, omission: ''})}
                 </p>
               </Field>
               <Field>
@@ -335,12 +343,14 @@ class Invoice extends PureComponent {
           <Footer>
             <SplitButton
               mainButton={{
-                label: t('invoices:btns:markAsPaid'),
-                action: () => setInvoiceStatus(invoice._id, 'paid'),
+                label: t('invoices:btns:markAsPending'),
+                action: () => setInvoiceStatus(invoice._id, 'pending'),
               }}
               options={statusActions}
             />
-            <Button onClick={this.editInvoice}>
+            <Button
+              disabled={invoice.status != 'draft'}
+              onClick={this.editInvoice}>
               {t('invoices:btns:edit')}
             </Button>
             <Button onClick={this.viewInvoice}>

@@ -20,7 +20,7 @@ const initialState = {
     // Other settings
     logoSize: '20',
     fontSize: '200',
-    alignItems: 'middle',
+    alignItems: 'top',
     // Toggle
     showLogo: true,
     useSymbol: true,

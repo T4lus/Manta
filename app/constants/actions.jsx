@@ -11,6 +11,7 @@ export const FORM_ITEM_MOVE = 'FORM_ITEM_MOVE';
 
 // Fields
 export const FORM_SAVE = 'FORM_SAVE';
+export const FORM_PREVIEW = 'FORM_PREVIEW';
 export const FORM_CLEAR = 'FORM_CLEAR';
 export const FORM_FIELD_TOGGLE = 'FORM_FIELD_TOGGLE';
 export const FORM_FIELD_UPDATE_DATA = 'FORM_FIELD_UPDATE_DATA';
@@ -35,6 +36,7 @@ export const INVOICE_DUPLICATE = 'INVOICE_DUPLICATE';
 export const CONTACT_GET_ALL = 'CONTACT_GET_ALL';
 export const CONTACT_DELETE = 'CONTACT_DELETE';
 export const CONTACT_SAVE = 'CONTACT_SAVE';
+export const CONTACT_UPDATE = 'CONTACT_UPDATE';
 
 // SETTINGS
 // ===========================================================

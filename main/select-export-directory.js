@@ -11,16 +11,20 @@ const appConfig = require('electron-settings');
 
 ipc.on('select-export-directory', event => {
   const window = BrowserWindow.fromWebContents(event.sender);
-  dialog.showOpenDialog(window, { properties: ['openDirectory'] }, path => {
-    if (path) {
-      fs.access(path[0], fs.constants.W_OK, err => {
+  dialog.showOpenDialog(window, {
+    properties: ['openDirectory']
+  }).then(result => {
+    if (result.filePaths) {
+      fs.access(result.filePaths[0], fs.constants.W_OK, err => {
         if (err) {
-          event.sender.send('no-access-directory', err.message);
+          event.reply('no-access-directory', err.message);
         } else {
-          appConfig.setSync('exportDir', path[0]);
-          event.sender.send('confirmed-export-directory', path[0]);
+          appConfig.setSync('exportDir', result.filePaths[0]);
+          event.reply('confirmed-export-directory', result.filePaths[0]);
         }
       });
     }
+  }).catch(err => {
+    event.reply('no-access-directory', err.message);
   });
 });

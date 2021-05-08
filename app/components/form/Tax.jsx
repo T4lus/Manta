@@ -1,6 +1,8 @@
 // Libraries
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+
 import { isEqual } from 'lodash';
 // Custom Components
 import { Section, Header } from '../shared/Section';
@@ -131,4 +133,4 @@ Tax.propTypes = {
 };
 
 // Exports
-export default _withFadeInAnimation(Tax);
+export default compose()(Tax);

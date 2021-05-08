@@ -104,7 +104,7 @@ export class Invoices extends PureComponent {
     const { dateFormat, invoices, t } = this.props;
     const { filter } = this.state;
     const filteredInvoices = filter ? invoices.filter(invoice => invoice.status === filter) : invoices
-    const invoicesComponent = filteredInvoices.map((invoice, index) => (
+    const invoicesComponent = filteredInvoices.sort(( a , b ) => parseInt(b.invoiceID) - parseInt(a.invoiceID)).map((invoice, index) => (
       <Invoice
         key={invoice._id}
         dateFormat={dateFormat}
@@ -118,7 +118,7 @@ export class Invoices extends PureComponent {
       />
     ));
     // Filter Buttons
-    const statuses = ['paid', 'pending', 'refunded', 'cancelled'];
+    const statuses = ['draft', 'pending', 'paid', 'refunded', 'cancelled'];
     const filterButtons = statuses.map(status => (
       <Button
         key={`${status}-button`}

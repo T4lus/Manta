@@ -9,6 +9,7 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 import Currency from './_partials/invoice/Currency';
 import Fields from './_partials/invoice/Fields';
+import InvoiceID from './_partials/invoice/InvoiceID';
 import Other from './_partials/invoice/Other';
 import Tax from './_partials/invoice/Tax';
 
@@ -19,6 +20,7 @@ class Invoice extends Component {
     this.state = this.props.invoice;
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
+    this.handleInvoiceIDChange = this.handleInvoiceIDChange.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
@@ -26,6 +28,7 @@ class Invoice extends Component {
   componentDidMount() {
     const { t } = this.props;
     ipc.on('no-access-directory', (event, message) => {
+      console.log('erreur');
       openDialog({
         type: 'warning',
         title: t('dialog:noAccess:title'),
@@ -34,6 +37,7 @@ class Invoice extends Component {
     });
 
     ipc.on('confirmed-export-directory', (event, path) => {
+      console.log(path);
       this.setState({ exportDir: path }, () => {
         this.props.updateSettings('invoice', this.state);
       });
@@ -61,6 +65,22 @@ class Invoice extends Component {
     this.setState(
       {
         tax: Object.assign({}, this.state.tax, {
+          [name]: value,
+        }),
+      },
+      () => {
+        this.props.updateSettings('invoice', this.state);
+      }
+    );
+  }
+
+  handleInvoiceIDChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'padding' ? parseInt(target.value) : target.value;
+    this.setState(
+      {
+        invoiceID: Object.assign({}, this.state.invoiceID, {
           [name]: value,
         }),
       },
@@ -112,6 +132,7 @@ class Invoice extends Component {
       exportDir,
       template,
       currency,
+      invoiceID,
       tax,
       required_fields,
       dateFormat,
@@ -121,6 +142,12 @@ class Invoice extends Component {
         key="required_fields_settings"
         required_fields={required_fields}
         handleVisibilityChange={this.handleVisibilityChange}
+        t={t}
+      />,
+      <InvoiceID
+        key="invoiceID_settings"
+        handleInvoiceIDChange={this.handleInvoiceIDChange}
+        invoiceID={invoiceID}
         t={t}
       />,
       <Tax

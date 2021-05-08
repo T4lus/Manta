@@ -5,7 +5,8 @@
     "btns": {
       "clear": "Supprimer",
       "update": "Mettre à jour",
-      "saveAndPreview": "Enregistrer et prévisualiser"
+      "save": "Enregistrer",
+      "preview": "Prévisualiser"
     }
   },
   "settings": {

@@ -1,6 +1,7 @@
 // Libraries
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 
 // Custom Components
 import { Section } from '../shared/Section';
@@ -51,6 +52,7 @@ export class InvoiceID extends PureComponent {
           type="text"
           onChange={this.handleInputChange}
           value={this.state.invoiceID}
+          disabled
         />
       </Section>
     );
@@ -64,4 +66,4 @@ InvoiceID.propTypes = {
 };
 
 // Export
-export default _withFadeInAnimation(InvoiceID);
+export default compose()(InvoiceID);

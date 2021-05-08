@@ -19,7 +19,7 @@ function validateFormData(formData) {
   } = formData;
   // Required fields
   const { required_fields } = settings;
-  if (!validateInvoiceID(required_fields.invoiceID, invoiceID)) return false;
+  //if (!validateInvoiceID(required_fields.invoiceID, invoiceID)) return false;
   if (!validateRecipient(recipient)) return false;
   if (!validateRows(rows)) return false;
   if (!validateDueDate(required_fields.dueDate, dueDate)) return false;
@@ -81,7 +81,7 @@ function getInvoiceData(formData) {
     _id: editMode.active ? editMode.data._id : uuidv4(),
     _rev: editMode.active ? editMode.data._rev : null,
     created_at: editMode.active ? editMode.data.created_at : Date.now(),
-    status: editMode.active ? editMode.data.status: 'pending',
+    status: editMode.active ? editMode.data.status: 'draft',
     // Alway calculate subtotal & grandTotal
     subtotal: getInvoiceValue(invoiceData).subtotal,
     grandTotal: getInvoiceValue(invoiceData).grandTotal,

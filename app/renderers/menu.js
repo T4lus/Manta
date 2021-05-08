@@ -56,6 +56,13 @@ const invoiceMenu = {
       },
     },
     {
+      label: 'Preview',
+      accelerator: 'CmdOrCtrl+P',
+      click() {
+        mainWindow.webContents.send('menu-form-preview');
+      },
+    },
+    {
       label: 'Reset',
       accelerator: 'CmdOrCtrl+R',
       click() {

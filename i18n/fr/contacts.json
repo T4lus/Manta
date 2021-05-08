@@ -1,5 +1,8 @@
 {
   "header": "Tous les contacts",
+  "btns": {
+    "new": "Créer un nouveau contact"
+  },
   "fields": {
     "contact": "Contact",
     "email": "Email",

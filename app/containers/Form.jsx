@@ -40,6 +40,7 @@ class Form extends PureComponent {
       clearForm,
       toggleField,
       saveFormData,
+      previewFormData,
       updateFieldData,
       toggleFormSettings,
       updateSavedFormSettings,
@@ -78,7 +79,13 @@ class Form extends PureComponent {
             >
               {editMode.active
                 ? t('form:header:btns:update')
-                : t('form:header:btns:saveAndPreview')}
+                : t('form:header:btns:save')}
+            </Button>
+            <Button
+              primary
+              onClick={previewFormData}
+            >
+              {t('form:header:btns:preview')}
             </Button>
           </PageHeaderActions>
         </PageHeader>
@@ -151,6 +158,7 @@ Form.propTypes = {
     // Works but need to refactor to handle passed click event
     clearForm: PropTypes.func.isRequired,
     saveFormData: PropTypes.func.isRequired,
+    previewFormData: PropTypes.func.isRequired,
     toggleField: PropTypes.func.isRequired,
     toggleFormSettings: PropTypes.func.isRequired,
     updateFieldData: PropTypes.func.isRequired,

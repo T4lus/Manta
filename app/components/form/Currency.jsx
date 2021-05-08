@@ -1,6 +1,8 @@
 // Libs
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
 import { keys, sortBy, isEqual } from 'lodash';
@@ -171,4 +173,4 @@ Currency.propTypes = {
 };
 
 // Export
-export default _withFadeInAnimation(Currency);
+export default compose()(Currency);

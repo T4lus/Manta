@@ -21,8 +21,7 @@ ipcMain.on('save-pdf', (event, docId) => {
     };
   }
 
-  win.webContents.printToPDF(printOptions, (error, data) => {
-    if (error) throw error;
+  win.webContents.printToPDF(printOptions).then(data => {
     fs.writeFile(pdfPath, data, error => {
       if (error) {
         throw error;
@@ -38,6 +37,8 @@ ipcMain.on('save-pdf', (event, docId) => {
         location: pdfPath,
       });
     });
+  }).catch(error => {
+    console.log(error);
   });
 });
 

@@ -1,6 +1,8 @@
 // Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+
 import { isEmpty } from 'lodash';
 
 // Custom Components
@@ -137,4 +139,4 @@ Discount.propTypes = {
 };
 
 // Exports
-export default _withFadeInAnimation(Discount);
+export default compose()(Discount);

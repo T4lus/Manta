@@ -212,6 +212,10 @@ function setInitialValues() {
       exportDir: os.homedir(),
       template: 'default',
       dateFormat: 'MM/DD/YYYY',
+      invoiceID:{
+        padding: 0,
+        prefix: 'none'
+      },
       tax: {
         tin: '123-456-789',
         method: 'default',
@@ -279,6 +283,10 @@ function migrateData() {
           template: appSettings.template,
           currency: appSettings.currency,
           dateFormat: 'MM/DD/YYYY',
+          invoiceID:{
+            padding:0,
+            prefix:'none'
+          },
           tax: {
             tin: '123-456-789',
             method: 'default',

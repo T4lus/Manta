@@ -10,6 +10,7 @@
     "total": "Valeur Totale"
   },
   "status": {
+    "draft":"Brouillon",
     "pending": "En attente",
     "paid": "Payée",
     "refunded": "Remboursée",
@@ -18,6 +19,6 @@
   "btns": {
     "view": "Visualiser",
     "edit": "Modifier",
-    "markAsPaid": "Marquer comme payée"
+    "markAsPending": "Marquer comme en attente"
   }
 }

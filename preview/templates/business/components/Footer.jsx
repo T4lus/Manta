@@ -25,7 +25,7 @@ function Footer({ t, invoice, configs }) {
       customAccentColor={customAccentColor}
     >
       <h4>{ t('preview:common:notice', {lng: language}) }</h4>
-      <p>{invoice.note}</p>
+      <p dangerouslySetInnerHTML={{__html: invoice.note}}></p>
     </InvoiceFooter>
   ) : null;
 }

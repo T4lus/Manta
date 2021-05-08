@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 
 // Custom Components
 import { Section } from '../shared/Section';
@@ -106,4 +107,4 @@ DueDate.propTypes = {
 };
 
 // Export
-export default _withFadeInAnimation(DueDate);
+export default compose()(DueDate);

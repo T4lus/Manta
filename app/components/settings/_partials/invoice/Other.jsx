@@ -26,17 +26,8 @@ function Other({
         <Field>
           <label className="itemLabel">{t('settings:fields:pdfExportDir')}</label>
           <ExportDir>
-            <input
-              name="exportDir"
-              type="text"
-              value={exportDir}
-              disabled
-            />
-            <a
-              href="#"
-              className="input-group-customized "
-              onClick={selectExportDir}
-            >
+            <input name="exportDir" type="text" value={exportDir} disabled />
+            <a href="#" className="input-group-customized " onClick={selectExportDir} >
               <i className="ion-folder" />
             </a>
           </ExportDir>
@@ -52,14 +43,9 @@ function Other({
         </Field>
         <Field>
           <label className="itemLabel">{t('settings:fields:dateFormat')}</label>
-          <select
-            name="dateFormat"
-            value={dateFormat}
-            onChange={handleInputChange}
-          >
+          <select name="dateFormat" value={dateFormat} onChange={handleInputChange} >
             <option value="dddd, MMMM Do, YYYY">
-              {moment(Date.now()).format('dddd, MMMM Do, YYYY')} (dddd, MMMM Do,
-              YYYY)
+              {moment(Date.now()).format('dddd, MMMM Do, YYYY')} (dddd, MMMM Do, YYYY)
             </option>
             <option value="MMMM Do, YYYY">
               {moment(Date.now()).format('MMMM Do, YYYY')} (MMMM Do, YYYY)
@@ -71,8 +57,7 @@ function Other({
               {moment(Date.now()).format('MM/DD/YY')} (MM/DD/YY)
             </option>
             <option value="dddd, DD MMMM YYYY">
-              {moment(Date.now()).format('dddd, DD MMMM YYYY')} (dddd, DD MMMM
-              YYYY)
+              {moment(Date.now()).format('dddd, DD MMMM YYYY')} (dddd, DD MMMM YYYY)
             </option>
             <option value="DD/MMMM/YYYY">
               {moment(Date.now()).format('DD/MMMM/YYYY')} (DD/MMMM/YYYY)

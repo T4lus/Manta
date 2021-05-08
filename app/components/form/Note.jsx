@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
 
 // Custom Components
 import { Section } from '../shared/Section';
@@ -10,6 +11,7 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Styles
 import styled from 'styled-components';
+
 const NoteContent = styled.textarea`
   min-height: 36px;
   border-radius: 4px;
@@ -73,4 +75,4 @@ Note.propTypes = {
 };
 
 // Export
-export default _withFadeInAnimation(Note);
+export default compose()(Note);

@@ -8,7 +8,9 @@ export const updateRecipient = createAction(
 );
 
 // ItemsRow
-export const addItem = createAction(ACTION_TYPES.FORM_ITEM_ADD);
+export const addItem = createAction(
+  ACTION_TYPES.FORM_ITEM_ADD
+);
 
 export const removeItem = createAction(
   ACTION_TYPES.FORM_ITEM_REMOVE,
@@ -34,13 +36,21 @@ export const clearForm = createAction(
   // the second one will be used to determined whether to play a sound or not
 );
 
-export const saveFormData = createAction(ACTION_TYPES.FORM_SAVE);
+export const saveFormData = createAction(
+  ACTION_TYPES.FORM_SAVE
+);
+
+export const previewFormData = createAction(
+  ACTION_TYPES.FORM_PREVIEW
+);
 
 export const toggleFormSettings = createAction(
   ACTION_TYPES.FORM_SETTING_TOGGLE
 );
 
-export const closeFormSettings = createAction(ACTION_TYPES.FORM_SETTING_CLOSE);
+export const closeFormSettings = createAction(
+  ACTION_TYPES.FORM_SETTING_CLOSE
+);
 
 export const updateSavedFormSettings = createAction(
   ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
