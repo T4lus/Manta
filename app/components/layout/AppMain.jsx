@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
+import Dashboard from '../../containers/Dashboard';
 import Form from '../../containers/Form';
 import Invoices from '../../containers/Invoices';
 import Contacts from '../../containers/Contacts';
@@ -20,6 +21,7 @@ class AppMain extends Component {
     const { activeTab } = this.props;
     return (
       <AppMainContent>
+        {activeTab === 'dashboard' && <Dashboard />}
         {activeTab === 'form' && <Form />}
         {activeTab === 'invoices' && <Invoices />}
         {activeTab === 'contacts' && <Contacts />}

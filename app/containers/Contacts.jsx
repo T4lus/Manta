@@ -14,12 +14,14 @@ import * as InvoicesActions from '../actions/invoices';
 // Components
 import Contact from '../components/contacts/Contact';
 import Message from '../components/shared/Message';
+import Button from '../components/shared/Button';
 import { Table, THead, TBody, TH, TR } from '../components/shared/Table';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
   PageHeader,
   PageHeaderTitle,
+  PageHeaderActions,
   PageContent,
 } from '../components/shared/Layout';
 
@@ -88,6 +90,11 @@ class Contacts extends PureComponent {
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>{t('contacts:header')}</PageHeaderTitle>
+          <PageHeaderActions>
+            <Button primary>
+              {t('contacts:btns:new')}
+            </Button>
+          </PageHeaderActions>
         </PageHeader>
         <PageContent>
           {contacts.length === 0 ? (

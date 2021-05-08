@@ -1,4 +1,5 @@
 import common from './common.json';
+import dashboard from './dashboard.json'
 import contacts from './contacts.json';
 import dialog from './dialog.json';
 import form from './form.json';
@@ -10,6 +11,7 @@ import tour from './tour.json';
 
 export default {
   common,
+  dashboard,
   contacts,
   dialog,
   form,

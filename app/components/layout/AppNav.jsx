@@ -20,6 +20,11 @@ const setMarginValue = activeTab => {
 
 const allTabs = [
   {
+    title: 'Dashboard',
+    name: 'dashboard',
+    icon: 'ion-stats-bars',
+  },
+  {
     title: 'Create',
     name: 'form',
     icon: 'ion-document-text',
@@ -75,6 +80,7 @@ export const Tab = styled.a`
 `;
 
 export const Icon = styled.i`
+  ${props => props.id === 'dashboard' && `color: #ffffff;`};
   ${props => props.id === 'form' && `color: #6bbb69;`};
   ${props => props.id === 'contacts' && `color: #469fe5;`};
   ${props => props.id === 'settings' && `color: #C4C8CC;`};
