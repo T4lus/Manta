@@ -37,8 +37,8 @@ function willLeave() {
 }
 
 // HOC Component
-const _withFadeInTransition = ComposedComponent => props => {
-  const wrapperStyle = { height: '100%' };
+const _withFadeInTransition = (ComposedComponent, customStyles = null) => props => {
+  const wrapperStyle = customStyles || { height: '100%' };
   return (
     <TransitionMotion
       willEnter={() => willEnter()}

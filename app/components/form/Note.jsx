@@ -75,4 +75,4 @@ Note.propTypes = {
 };
 
 // Export
-export default compose()(Note);
+export default _withFadeInAnimation(Note, {});

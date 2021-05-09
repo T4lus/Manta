@@ -66,4 +66,4 @@ InvoiceID.propTypes = {
 };
 
 // Export
-export default compose()(InvoiceID);
+export default _withFadeInAnimation(InvoiceID, {});

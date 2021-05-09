@@ -173,4 +173,4 @@ Currency.propTypes = {
 };
 
 // Export
-export default compose()(Currency);
+export default _withFadeInAnimation(Currency, {});

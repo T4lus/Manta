@@ -133,4 +133,4 @@ Tax.propTypes = {
 };
 
 // Exports
-export default compose()(Tax);
+export default _withFadeInAnimation(Tax, {});

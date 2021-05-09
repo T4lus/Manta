@@ -107,4 +107,4 @@ DueDate.propTypes = {
 };
 
 // Export
-export default compose()(DueDate);
+export default _withFadeInAnimation(DueDate, {});

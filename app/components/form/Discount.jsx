@@ -139,4 +139,4 @@ Discount.propTypes = {
 };
 
 // Exports
-export default compose()(Discount);
+export default _withFadeInAnimation(Discount, {});
