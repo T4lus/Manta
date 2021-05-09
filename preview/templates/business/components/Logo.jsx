@@ -69,28 +69,31 @@ const Heading = styled.h1`
 
 
 // Component
-function Logo({t, profile, configs }) {
+function Logo({t, invoice, profile, configs }) {
   const { showLogo, logoSize } = configs;
   const { language, accentColor, customAccentColor  } = configs;
-  return showLogo ? (
+  return (
     <InvoiceHeader>
       <LeftColumn>
+        {showLogo && (
         <Wrapper logoSize={logoSize}>
           <img src={profile.logo} alt="Logo" />
         </Wrapper>
+        )}
       </LeftColumn>
       <RightColumn>
         <Heading accentColor={accentColor} customAccentColor={customAccentColor}>
-          {t('preview:common:invoice', { lng: language })}
+          {invoice.status == 'draft' ? t('preview:common:quote', { lng: language }) : t('preview:common:invoice', { lng: language })}
         </Heading>
       </RightColumn>
     </InvoiceHeader>  
     
-  ) : null;
+  );
 }
 
 Logo.propTypes = {
   configs: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
 };
