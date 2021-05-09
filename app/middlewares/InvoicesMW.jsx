@@ -206,8 +206,13 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
       return getSingleDoc('invoices', invoiceID)
         .then(doc => {
           getAllDocs('invoices').then(allDocs => {
-            let invoiceID = doc.status == 'draft' ? zeroFill(allDocs.filter(invoice => invoice.status != 'draft').length + 1, appConfig.getSync('invoice.invoiceID.padding')) : doc.invoiceID;
-            invoiceID = appConfig.getSync('invoice.invoiceID.prefix') != 'none' ? moment(Date.now()).format(appConfig.getSync('invoice.invoiceID.prefix')) + invoiceID : invoiceID;
+            let invoiceID = doc.invoiceID;
+            
+            if (doc.status == 'draft') {
+              invoiceID = zeroFill(allDocs.filter(invoice => invoice.status != 'draft').length + 1, appConfig.getSync('invoice.invoiceID.padding'));
+              invoiceID = appConfig.getSync('invoice.invoiceID.prefix') != 'none' ? moment(Date.now()).format(appConfig.getSync('invoice.invoiceID.prefix')) + invoiceID : invoiceID;
+            }
+
             dispatch({
               type: ACTION_TYPES.INVOICE_UPDATE,
               payload: Object.assign({}, doc, {
