@@ -1,5 +1,7 @@
 {
   "header": "Tous les contacts",
+  "header_edit": "Edition du contacts",
+  "header_add": "Nouveau contacts",
   "btns": {
     "new": "Créer un nouveau contact"
   },

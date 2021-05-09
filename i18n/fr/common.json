@@ -7,6 +7,13 @@
     "phone": "N° de téléphone",
     "website": "Site Internet"
   },
+  "btns": {
+    "cancel": "Annuler",
+    "clear": "Supprimer",
+    "update": "Mettre à jour",
+    "save": "Enregistrer",
+    "preview": "Prévisualiser"
+  },
   "save": "Sauvegarder",
   "amount": "Montant",
   "default": "Valeurs par défaut",
