@@ -4,6 +4,29 @@ import PropTypes from 'prop-types';
 
 // Styles
 import styled from 'styled-components';
+
+const InvoiceHeader = styled.div`
+  flex: 1;
+  flex: none;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LeftColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+`;
+
+const RightColumn = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+`;
+
 const InvoiceLogo = styled.div`
   flex: 1;
   max-height: 6em;
@@ -30,19 +53,46 @@ const Wrapper = styled.div`
   }
 `;
 
+const Heading = styled.h1`
+  margin: 0 0 10px 0;
+  font-size: 2em;
+  font-weight: 400;
+  color: #cbc189;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  ${props =>
+    props.customAccentColor &&
+    `
+    color: ${props.accentColor};
+  `};
+`;
+
+
 // Component
-function Logo({ profile, configs }) {
+function Logo({t, profile, configs }) {
   const { showLogo, logoSize } = configs;
+  const { language, accentColor, customAccentColor  } = configs;
   return showLogo ? (
-    <Wrapper logoSize={logoSize}>
-      <img src={profile.logo} alt="Logo" />
-    </Wrapper>
+    <InvoiceHeader>
+      <LeftColumn>
+        <Wrapper logoSize={logoSize}>
+          <img src={profile.logo} alt="Logo" />
+        </Wrapper>
+      </LeftColumn>
+      <RightColumn>
+        <Heading accentColor={accentColor} customAccentColor={customAccentColor}>
+          {t('preview:common:invoice', { lng: language })}
+        </Heading>
+      </RightColumn>
+    </InvoiceHeader>  
+    
   ) : null;
 }
 
 Logo.propTypes = {
   configs: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 

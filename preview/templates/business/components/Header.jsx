@@ -28,7 +28,9 @@ const Company = styled.div`
   margin-bottom: 1.66667em;
 `;
 
-const Recipient = styled.div``;
+const InvoiceInfos = styled.div`
+  margin-top:20px;
+`;
 
 const RightColumn = styled.div`
   flex: 1;
@@ -36,29 +38,10 @@ const RightColumn = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
-  h4 {
-    font-size: 1.16667em;
-    color: #dbbd8a;
-    margin: 0;
-    font-weight: 300;
-  }
-  p {
-    text-transform: capitalize;
-  }
 `;
 
-const Heading = styled.h1`
-  margin: 0 0 10px 0;
-  font-size: 2em;
-  font-weight: 400;
-  color: #cbc189;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  ${props =>
-    props.customAccentColor &&
-    `
-    color: ${props.accentColor};
-  `};
+const Recipient = styled.div`
+  width: 75%;
 `;
 
 // Component
@@ -76,7 +59,45 @@ function Header({ t, invoice, profile, configs }) {
           <p>{profile.phone}</p>
           { tax && <p>Tax ID: { tax.tin }</p> }
         </Company>
-
+        <InvoiceInfos>
+          <h4>
+            #{invoice.invoiceID ? invoice.invoiceID : truncate(invoice._id, { length: 8, omission: '', })}
+          </h4>
+          <p>
+            {t('preview:common:created', { lng: language })}:{' '}
+            {moment(invoice.created_at)
+              .locale(language)
+              .format(configs.dateFormat)}
+          </p>
+          {invoice.dueDate && [
+            <p key="dueDate">
+              {t('preview:common:due', { lng: language })}:{' '}
+              {invoice.dueDate.useCustom
+                ? moment(invoice.dueDate.selectedDate)
+                    .locale(language)
+                    .format(configs.dateFormat)
+                : moment(
+                    calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
+                  )
+                    .locale(language)
+                    .format(configs.dateFormat)}
+            </p>,
+            <p key="dueDateNote">
+              {!invoice.dueDate.useCustom &&
+                `
+              (
+                ${t(
+                  `form:fields:dueDate:paymentTerms:${
+                    invoice.dueDate.paymentTerm
+                  }:description`
+                )}
+              )
+              `}
+            </p>,
+          ]}
+        </InvoiceInfos>
+      </LeftColumn>
+      <RightColumn>
         {configs.showRecipient && (
           <Recipient>
             <h4>{t('preview:common:billedTo', { lng: language })}</h4>
@@ -86,55 +107,6 @@ function Header({ t, invoice, profile, configs }) {
             <p>{recipient.phone}</p>
           </Recipient>
         )}
-      </LeftColumn>
-      <RightColumn>
-        <Heading
-          accentColor={accentColor}
-          customAccentColor={customAccentColor}
-        >
-          {t('preview:common:invoice', { lng: language })}
-        </Heading>
-        <h4>
-          #
-          {invoice.invoiceID
-            ? invoice.invoiceID
-            : truncate(invoice._id, {
-                length: 8,
-                omission: '',
-              })}
-        </h4>
-        <p>
-          {t('preview:common:created', { lng: language })}:{' '}
-          {moment(invoice.created_at)
-            .locale(language)
-            .format(configs.dateFormat)}
-        </p>
-        {invoice.dueDate && [
-          <p key="dueDate">
-            {t('preview:common:due', { lng: language })}:{' '}
-            {invoice.dueDate.useCustom
-              ? moment(invoice.dueDate.selectedDate)
-                  .locale(language)
-                  .format(configs.dateFormat)
-              : moment(
-                  calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
-                )
-                  .locale(language)
-                  .format(configs.dateFormat)}
-          </p>,
-          <p key="dueDateNote">
-            {!invoice.dueDate.useCustom &&
-              `
-            (
-              ${t(
-                `form:fields:dueDate:paymentTerms:${
-                  invoice.dueDate.paymentTerm
-                }:description`
-              )}
-            )
-            `}
-          </p>,
-        ]}
       </RightColumn>
     </InvoiceHeader>
   );
