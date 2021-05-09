@@ -11,6 +11,7 @@ class Contact extends PureComponent {
   constructor(props) {
     super(props);
     this.deleteContact = this.deleteContact.bind(this);
+    this.editContact = this.editContact.bind(this);
     this.newInvoice = this.newInvoice.bind(this);
   }
 
@@ -24,6 +25,11 @@ class Contact extends PureComponent {
     deleteContact(contact._id);
   }
 
+ editContact() {
+    const { contact, editContact } = this.props;
+    editContact(contact._id);
+  }
+
   render() {
     const { contact } = this.props;
     return (
@@ -32,6 +38,9 @@ class Contact extends PureComponent {
         <TD>{contact.email}</TD>
         <TD>{contact.phone}</TD>
         <TD actions>
+        <Button link primary onClick={this.editContact}>
+            <i className="ion-android-create" />
+          </Button>
           <Button link primary onClick={this.newInvoice}>
             <i className="ion-plus-round" />
           </Button>
@@ -47,6 +56,7 @@ class Contact extends PureComponent {
 Contact.propTypes = {
   contact: PropTypes.object.isRequired,
   deleteContact: PropTypes.func.isRequired,
+  editContact: PropTypes.func.isRequired,
   newInvoice: PropTypes.func.isRequired,
 };
 

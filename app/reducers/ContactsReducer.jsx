@@ -17,6 +17,7 @@ export default ContactsReducer;
 
 // Selector
 const getContactsState = state => state.contacts;
+
 export const getContacts = createSelector(
   getContactsState,
   contacts => contacts
