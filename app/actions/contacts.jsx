@@ -9,13 +9,19 @@ export const getAllContacts = createAction(
 // Save A Contact
 export const saveContact = createAction(
   ACTION_TYPES.CONTACT_SAVE,
-  invoiceData => invoiceData
+  contactData => contactData
 );
 
-// Save A Contact
+// Edit A Contact
+export const editContact = createAction(
+  ACTION_TYPES.CONTACT_EDIT,
+  contactData => contactData
+);
+
+// Update A Contact
 export const updateContact = createAction(
   ACTION_TYPES.CONTACT_UPDATE,
-  invoiceData => invoiceData
+  updatedContact => updatedContact
 );
 
 // Delete A Contact

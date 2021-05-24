@@ -37,6 +37,13 @@ export const CONTACT_GET_ALL = 'CONTACT_GET_ALL';
 export const CONTACT_DELETE = 'CONTACT_DELETE';
 export const CONTACT_SAVE = 'CONTACT_SAVE';
 export const CONTACT_UPDATE = 'CONTACT_UPDATE';
+export const CONTACT_EDIT = 'CONTACT_EDIT';
+
+
+// CONTACT FORM
+// ===========================================================
+export const CONTACT_FORM_SAVE = 'CONTACT_FORM_SAVE';
+export const CONTACT_FORM_CLEAR = 'CONTACT_FORM_CLEAR';
 
 // SETTINGS
 // ===========================================================

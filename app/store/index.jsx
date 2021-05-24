@@ -11,13 +11,14 @@ import Logger from 'redux-logger';
 // Custom Middleware
 import MeasureMW from '../middlewares/MeasureMW';
 import FormMW from '../middlewares/FormMW';
+import ContactFormMW from '../middlewares/ContactFormMW';
 import ContactsMW from '../middlewares/ContactsMW';
 import InvoicesMW from '../middlewares/InvoicesMW';
 import SettingsMW from '../middlewares/SettingsMW';
 import UIMiddleware from '../middlewares/UIMiddleware';
 
 // Default Middlewares
-const middlewares = [FormMW, ContactsMW, InvoicesMW, SettingsMW, UIMiddleware];
+const middlewares = [FormMW, ContactFormMW, ContactsMW, InvoicesMW, SettingsMW, UIMiddleware];
 
 // Dev Mode Middlewares
 if (isDev) {

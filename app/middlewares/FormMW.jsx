@@ -25,7 +25,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       if (!validateFormData(currentFormData)) return;
       const currentInvoiceData = getInvoiceData(currentFormData);
       // UPDATE DOC
-      if (currentFormData.settings.editMode.active) {
+      if (currentFormData.settings.editMode) {
         // Update existing invoice
         dispatch(InvoicesActions.updateInvoice(currentInvoiceData));
         // Change Tab to invoices
@@ -50,7 +50,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       if (!validateFormData(currentFormData)) return;
       const currentInvoiceData = getInvoiceData(currentFormData);
       // UPDATE DOC
-      if (currentFormData.settings.editMode.active) {
+      if (currentFormData.settings.editMode) {
         // Update existing invoice
         dispatch(InvoicesActions.updateInvoice(currentInvoiceData));
       } else {

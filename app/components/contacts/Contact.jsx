@@ -25,9 +25,9 @@ class Contact extends PureComponent {
     deleteContact(contact._id);
   }
 
- editContact() {
+  editContact() {
     const { contact, editContact } = this.props;
-    editContact(contact._id);
+    editContact(contact);
   }
 
   render() {

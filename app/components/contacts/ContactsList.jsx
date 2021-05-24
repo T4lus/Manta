@@ -104,7 +104,7 @@ class ContactsList extends PureComponent {
             <Table hasBorders bg>
               <THead>
                 <TR>
-                  <TH>{t('contacts:fields:contact')}</TH>
+                  <TH>{t('contacts:fields:contact:header')}</TH>
                   <TH>{t('contacts:fields:email')}</TH>
                   <TH>{t('contacts:fields:phone')}</TH>
                   <TH actions>{t('contacts:fields:actions')}</TH>

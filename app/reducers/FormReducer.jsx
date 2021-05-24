@@ -30,9 +30,7 @@ const initialState = {
   // Form current settings
   settings: {
     open: false,
-    editMode: {
-      active: false,
-    },
+    editMode: false,
     required_fields: invoiceSettings.required_fields,
   },
   // Saved settings, reserve for reference
@@ -150,10 +148,7 @@ const FormReducer = handleActions(
             : state.note,
         // Update settings
         settings: Object.assign({}, state.settings, {
-          editMode: {
-            active: true,
-            data: action.payload,
-          },
+          editMode: true,
           required_fields: Object.assign({}, state.settings.required_fields, {
             invoiceID: invoiceID !== undefined,
             currency: currency !== state.savedSettings.currency,
@@ -186,9 +181,7 @@ const FormReducer = handleActions(
         // Update current settings
         settings: Object.assign({}, state.settings, {
           open: false,
-          editMode: {
-            active: false,
-          },
+          editMode: false,
           required_fields: state.savedSettings.required_fields,
         }),
         // Updated saved settings to the current saved settings

@@ -1,8 +1,12 @@
 // Libs
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 const ipc = require('electron').ipcRenderer;
+
+// Actions
+import * as Actions from '../actions/contacts';
 
 // Components
 import ContactsList from '../components/contacts/ContactsList'
@@ -29,8 +33,11 @@ class Contacts extends PureComponent {
     
   }
 
-  editContact(contactId) {  
+  editContact(contact) {  
     this.setState({ edit : true });
+
+    const { dispatch } = this.props;
+    dispatch(Actions.editContact(contact));
   }
 
   render() {
@@ -44,8 +51,11 @@ class Contacts extends PureComponent {
 }
 
 // PropTypes
-Contacts.propTypes = { };
+Contacts.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default compose(
+  connect(),
   _withFadeInAnimation
 )(Contacts);

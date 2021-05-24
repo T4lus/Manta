@@ -6,9 +6,30 @@
     "new": "Créer un nouveau contact"
   },
   "fields": {
-    "contact": "Contact",
+    "general": {
+      "header": "General",
+      "company": "Société",
+      "companyID": "SIRET"
+    },
+    "contact": {
+      "header": "Contact",
+      "fullname":"Nom et prénom",
+      "email":"Email",
+      "phone":"N° de téléphone"
+    }, 
+    "address": {
+      "header": "Adresse",
+      "line_1": "Ligne 1",
+      "line_2": "Ligne 2",
+      "postcode": "Code Postal",
+      "city": "Ville",
+      "state": "Etat / Province / Region",
+      "country": "Pays"
+    },
     "email": "Email",
     "phone": "Téléphone",
+    
+    
     "actions": "Actions"
   }
 }
