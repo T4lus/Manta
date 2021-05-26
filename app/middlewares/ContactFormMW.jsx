@@ -19,14 +19,15 @@ const ContactFormMW = ({ dispatch, getState }) => next => action => {
             const currentContactData = getContactData(getState().contactForm);
             console.log(currentContactData);
 
-            if (currentContactData.settings.editMode) {
-                dispatch(ContactsActions.updateContact(currentContactData));
-              } else {
+            
+            //if (currentContactData.settings.editMode) {
+            //    dispatch(ContactsActions.updateContact(currentContactData));
+            //} else {
                 dispatch(ContactsActions.saveContact(currentContactData));
-              }
-
+            //}
+            
             // Clear The Form
-            dispatch(ContactFormActions.clearContactForm(null, true));
+            //dispatch(ContactFormActions.clearContactForm(null, true));
             break;
         }
         case ACTION_TYPES.CONTACT_FORM_CLEAR: {

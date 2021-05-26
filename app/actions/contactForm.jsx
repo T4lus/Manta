@@ -6,6 +6,11 @@ export const clearContactForm = createAction(
     (event, muted = false) => muted
   );
 
+export const updateContactForm = createAction(
+  ACTION_TYPES.CONTACT_FORM_UPDATE,
+  data => data
+);
+
 export const saveContactForm = createAction(
     ACTION_TYPES.CONTACT_FORM_SAVE
 );

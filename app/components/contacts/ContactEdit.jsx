@@ -39,12 +39,35 @@ const NoteContent = styled.textarea`
 class ContactEdit extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = this.props.currentContact;
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
   }
 
   componentWillUnmount() {
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    var parts = name.split('.');
+    if (parts[1])
+    {
+      this.setState( { address: {...this.state.address, [parts[1]]: value } }, () => {
+        this.props.boundFormActionCreators.updateContactForm(this.state);
+      });
+    }
+    else
+    {
+      this.setState({ [name]: value }, () => {
+        this.props.boundFormActionCreators.updateContactForm(this.state);
+      });
+    }
   }
 
   render() {
@@ -95,7 +118,8 @@ class ContactEdit extends PureComponent {
                 <input
                   name="company"
                   type="text"
-                  value={company}
+                  value={this.state.company}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
@@ -103,7 +127,8 @@ class ContactEdit extends PureComponent {
                 <input
                   name="companyID"
                   type="text"
-                  value={companyID}
+                  value={this.state.companyID}
+                  onChange={this.handleChange}
                 />
               </Field>
             </Row>
@@ -116,7 +141,8 @@ class ContactEdit extends PureComponent {
                 <input
                   name="fullname"
                   type="text"
-                  value={fullname}
+                  value={this.state.fullname}
+                  onChange={this.handleChange}
                 />
               </Field>
             </Row>
@@ -126,7 +152,8 @@ class ContactEdit extends PureComponent {
                 <input
                   name="email"
                   type="text"
-                  value={email}
+                  value={this.state.email}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
@@ -134,7 +161,8 @@ class ContactEdit extends PureComponent {
                 <input
                   name="phone"
                   type="text"
-                  value={phone}
+                  value={this.state.phone}
+                  onChange={this.handleChange}
                 />
               </Field>
             </Row>
@@ -144,49 +172,55 @@ class ContactEdit extends PureComponent {
             <Field>
                 <label className="itemLabel">{t('contacts:fields:address:line_1')}</label>
                 <input
-                  name="line_1"
+                  name="address.line_1"
                   type="text"
-                  value={address.line_1}
+                  value={this.state.address.line_1}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
                 <label className="itemLabel">{t('contacts:fields:address:line_2')}</label>
                 <input
-                  name="line_2"
+                  name="address.line_2"
                   type="text"
-                  value={address.line_2}
+                  value={this.state.address.line_2}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
                 <label className="itemLabel">{t('contacts:fields:address:postcode')}</label>
                 <input
-                  name="postcode"
+                  name="address.postcode"
                   type="text"
-                  value={address.postcode}
+                  value={this.state.address.postcode}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
                 <label className="itemLabel">{t('contacts:fields:address:city')}</label>
                 <input
-                  name="city"
+                  name="address.city"
                   type="text"
-                  value={address.city}
+                  value={this.state.address.city}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
                 <label className="itemLabel">{t('contacts:fields:address:state')}</label>
                 <input
-                  name="state"
+                  name="address.state"
                   type="text"
-                  value={address.state}
+                  value={this.state.address.state}
+                  onChange={this.handleChange}
                 />
               </Field>
               <Field>
                 <label className="itemLabel">{t('contacts:fields:address:country')}</label>
                 <input
-                  name="country"
+                  name="address.country"
                   type="text"
-                  value={address.country}
+                  value={this.state.address.country}
+                  onChange={this.handleChange}
                 />
               </Field>
               
@@ -197,6 +231,8 @@ class ContactEdit extends PureComponent {
             <NoteContent
               cols="50"
               rows="4"
+              value={this.state.note}
+              onChange={this.handleChange}
               placeholder={t('form:fields:note')}
             />
           </Section>
@@ -210,6 +246,7 @@ class ContactEdit extends PureComponent {
 ContactEdit.propTypes = {
   boundFormActionCreators: PropTypes.shape({
     clearContactForm: PropTypes.func.isRequired,
+    updateContactForm: PropTypes.func.isRequired,
     saveContactForm: PropTypes.func.isRequired,
   }).isRequired,
   currentContact: PropTypes.shape({

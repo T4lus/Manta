@@ -46,18 +46,24 @@ const initialState = {
           phone: phone !== undefined ? phone : state.phone,
           email: email !== undefined ? email : state.email,
           address: address !== undefined ? address : state.address,
-          note:
-            note !== undefined
-              ? Object.assign({}, state.note, {
-                  content: note,
-                })
-              : state.note,
-          settings: Object.assign({}, state.settings, {
-            editMode: true,
-            editData: action.payload,
-          }),
+          note: note !== undefined ? {...state.note, content: note} : state.note,
+
+          settings: {...state.settings,
+            editMode: action.payload._id !== undefined ? true : false,
+            editData: action.payload
+          }
         });
       },
+
+      [ACTION_TYPES.CONTACT_FORM_UPDATE]: (state, action) => {
+        console.log('-------');
+        console.log(action.payload);
+        console.log('-------');
+        console.log(state);
+        console.log('-------');
+        return Object.assign({}, state, action.payload);
+      },
+      
 
       [ACTION_TYPES.CONTACT_FORM_CLEAR]: state =>
         Object.assign({}, initialState)

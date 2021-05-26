@@ -56,6 +56,32 @@ const ContactsMW = ({ dispatch }) => next => action => {
         });
     }
 
+    case ACTION_TYPES.CONTACT_UPDATE: {
+      return updateDoc('contacts', action.payload)
+        .then(docs => {
+          next({
+            type: ACTION_TYPES.CONTACT_UPDATE,
+            payload: docs,
+          });
+          dispatch({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: i18n.t('messages:contact:updated'),
+            },
+          });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
+    }
+
     case ACTION_TYPES.CONTACT_DELETE: {
       return deleteDoc('contacts', action.payload)
         .then(remainingDocs => {

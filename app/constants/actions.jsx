@@ -43,6 +43,7 @@ export const CONTACT_EDIT = 'CONTACT_EDIT';
 // CONTACT FORM
 // ===========================================================
 export const CONTACT_FORM_SAVE = 'CONTACT_FORM_SAVE';
+export const CONTACT_FORM_UPDATE = 'CONTACT_FORM_UPDATE';
 export const CONTACT_FORM_CLEAR = 'CONTACT_FORM_CLEAR';
 
 // SETTINGS
