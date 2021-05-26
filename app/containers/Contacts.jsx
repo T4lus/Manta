@@ -21,6 +21,7 @@ class Contacts extends PureComponent {
   constructor(props) {
     super(props);
     this.editContact = this.editContact.bind(this);
+    this.closeEditContact = this.closeEditContact.bind(this);
 
     this.state = { edit : false };
   }
@@ -33,9 +34,13 @@ class Contacts extends PureComponent {
     
   }
 
+  closeEditContact() {
+    this.setState({ edit : false });
+    console.log('=========== TEST ===========');
+  }
+
   editContact(contact) {  
     this.setState({ edit : true });
-
     const { dispatch } = this.props;
     dispatch(Actions.editContact(contact));
   }
@@ -44,7 +49,7 @@ class Contacts extends PureComponent {
     return (
       <React.Fragment>
         {this.state.edit === false && <ContactsList editContact={this.editContact} />}
-        {this.state.edit === true && <ContactEdit />}
+        {this.state.edit === true && <ContactEdit closeEditContact={this.closeEditContact}/>}
       </React.Fragment>
     );
   }

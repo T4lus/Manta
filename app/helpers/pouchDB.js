@@ -194,10 +194,9 @@ const deleteDoc = (dbName, doc) =>
 const updateDoc = (dbName, updatedDoc) =>
   new Promise((resolve, reject) => {
     setDB(dbName)
-      .then(db =>
-        db
-          .put(updatedDoc)
-          .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
+      .then(db => 
+        db.put(updatedDoc)
+        .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
       )
       .catch(err => reject(err));
   });

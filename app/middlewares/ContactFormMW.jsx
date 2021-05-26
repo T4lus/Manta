@@ -1,5 +1,6 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
+const ipc = require('electron').ipcRenderer;
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -17,17 +18,14 @@ const ContactFormMW = ({ dispatch, getState }) => next => action => {
     switch (action.type) {
         case ACTION_TYPES.CONTACT_FORM_SAVE: {
             const currentContactData = getContactData(getState().contactForm);
-            console.log(currentContactData);
-
-            
-            //if (currentContactData.settings.editMode) {
-            //    dispatch(ContactsActions.updateContact(currentContactData));
-            //} else {
+            if (getState().contactForm.settings.editMode) {
+                dispatch(ContactsActions.updateContact(currentContactData));
+            } else {
                 dispatch(ContactsActions.saveContact(currentContactData));
-            //}
+            }
             
             // Clear The Form
-            //dispatch(ContactFormActions.clearContactForm(null, true));
+            dispatch(ContactFormActions.clearContactForm(null, true));
             break;
         }
         case ACTION_TYPES.CONTACT_FORM_CLEAR: {

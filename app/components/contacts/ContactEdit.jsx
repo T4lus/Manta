@@ -42,6 +42,9 @@ class ContactEdit extends PureComponent {
     this.state = this.props.currentContact;
 
     this.handleChange = this.handleChange.bind(this);
+
+    this.saveContactForm = this.saveContactForm.bind(this);
+    this.clearContactForm = this.clearContactForm.bind(this);
   }
 
   componentDidMount() {
@@ -59,7 +62,7 @@ class ContactEdit extends PureComponent {
     if (parts[1])
     {
       this.setState( { address: {...this.state.address, [parts[1]]: value } }, () => {
-        this.props.boundFormActionCreators.updateContactForm(this.state);
+        this.props.boundFormActionCreators.updateContactForm(this.state)
       });
     }
     else
@@ -69,6 +72,17 @@ class ContactEdit extends PureComponent {
       });
     }
   }
+
+  saveContactForm() {
+    this.props.boundFormActionCreators.saveContactForm();
+    this.props.closeEditContact();
+  }
+
+  clearContactForm() {
+    this.props.boundFormActionCreators.clearContactForm();
+    this.props.closeEditContact();
+  }
+
 
   render() {
     const { clearContactForm, saveContactForm } = this.props.boundFormActionCreators;
@@ -94,14 +108,14 @@ class ContactEdit extends PureComponent {
           <PageHeaderActions>
             <Button 
               danger 
-              onClick={clearContactForm}
+              onClick={this.clearContactForm}
             >
               {t('common:btns:cancel')}
             </Button>
             <Button
               primary={editMode}
               success={editMode === false}
-              onClick={saveContactForm}
+              onClick={this.saveContactForm}
             >
               {editMode
                 ? t('common:btns:update')
@@ -252,6 +266,7 @@ ContactEdit.propTypes = {
   currentContact: PropTypes.shape({
     settings: PropTypes.object.isRequired,
   }).isRequired,
+  closeEditContact: PropTypes.func.isRequired,
 };
 
 // Map state to props & Export

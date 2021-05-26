@@ -5,7 +5,7 @@ import uuidv4 from 'uuid/v4';
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
 // Helpers
-import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
+import { getAllDocs, getSingleDoc, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 import i18n from '../../i18n/i18n';
 
 const ContactsMW = ({ dispatch }) => next => action => {

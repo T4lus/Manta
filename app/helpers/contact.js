@@ -16,15 +16,15 @@ function getContactData(ContactFormData) {
         note,
         settings,
     } = ContactFormData;
-    // Required fields
     const { editMode, editData } = settings;
 
+    const contactData = { company, companyID, fullname, phone, email, address, note }
     // Return final value
-    return Object.assign({}, ContactFormData, {
+    return Object.assign({}, contactData, {
       // Metadata
-      _id: editMode.active ? editData._id : uuidv4(),
-      _rev: editMode.active ? editData._rev : null,
-      created_at: editMode.active ? editData.created_at : Date.now(),
+      _id: editMode ? editData._id : uuidv4(),
+      _rev: editMode ? editData._rev : null,
+      created_at: editMode ? editData.created_at : Date.now(),
     });
 }
 

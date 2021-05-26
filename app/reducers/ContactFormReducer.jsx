@@ -56,11 +56,6 @@ const initialState = {
       },
 
       [ACTION_TYPES.CONTACT_FORM_UPDATE]: (state, action) => {
-        console.log('-------');
-        console.log(action.payload);
-        console.log('-------');
-        console.log(state);
-        console.log('-------');
         return Object.assign({}, state, action.payload);
       },
       
