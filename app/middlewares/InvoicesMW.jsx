@@ -124,9 +124,9 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
             },
           });
           // Clear form if this invoice is being editted
-          const { editMode } = getState().form.settings;
+          const { editMode, editData } = getState().form.settings;
           if (editMode.active) {
-            if (editMode.data._id === action.payload) {
+            if (editData._id === action.payload) {
               dispatch({ type: ACTION_TYPES.FORM_CLEAR });
             }
           }

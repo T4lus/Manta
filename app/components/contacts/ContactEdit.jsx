@@ -50,7 +50,16 @@ class ContactEdit extends PureComponent {
   render() {
     const { clearContactForm, saveContactForm } = this.props.boundFormActionCreators;
     // Form Value
-    const { settings } = this.props.currentContact;
+    const { 
+      company,
+      companyID,
+      fullname,
+      phone,
+      email,
+      address,
+      note,
+      settings, 
+    } = this.props.currentContact;
     const { editMode } = settings;
     // Translation
     const { t } = this.props;
@@ -86,6 +95,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="company"
                   type="text"
+                  value={company}
                 />
               </Field>
               <Field>
@@ -93,6 +103,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="companyID"
                   type="text"
+                  value={companyID}
                 />
               </Field>
             </Row>
@@ -105,6 +116,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="fullname"
                   type="text"
+                  value={fullname}
                 />
               </Field>
             </Row>
@@ -114,6 +126,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="email"
                   type="text"
+                  value={email}
                 />
               </Field>
               <Field>
@@ -121,6 +134,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="phone"
                   type="text"
+                  value={phone}
                 />
               </Field>
             </Row>
@@ -132,6 +146,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="line_1"
                   type="text"
+                  value={address.line_1}
                 />
               </Field>
               <Field>
@@ -139,6 +154,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="line_2"
                   type="text"
+                  value={address.line_2}
                 />
               </Field>
               <Field>
@@ -146,6 +162,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="postcode"
                   type="text"
+                  value={address.postcode}
                 />
               </Field>
               <Field>
@@ -153,6 +170,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="city"
                   type="text"
+                  value={address.city}
                 />
               </Field>
               <Field>
@@ -160,6 +178,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="state"
                   type="text"
+                  value={address.state}
                 />
               </Field>
               <Field>
@@ -167,6 +186,7 @@ class ContactEdit extends PureComponent {
                 <input
                   name="country"
                   type="text"
+                  value={address.country}
                 />
               </Field>
               

@@ -43,7 +43,7 @@ function getInvoiceData(formData) {
     settings,
   } = formData;
   // Required fields
-  const { editMode, required_fields } = settings;
+  const { editMode, editData, required_fields } = settings;
   // Set Initial Value
   const invoiceData = { rows };
   // Set Recipient
@@ -78,10 +78,10 @@ function getInvoiceData(formData) {
   // Return final value
   return Object.assign({}, invoiceData, {
     // Metadata
-    _id: editMode.active ? editMode.data._id : uuidv4(),
-    _rev: editMode.active ? editMode.data._rev : null,
-    created_at: editMode.active ? editMode.data.created_at : Date.now(),
-    status: editMode.active ? editMode.data.status: 'draft',
+    _id: editMode ? editData._id : uuidv4(),
+    _rev: editMode ? editData._rev : null,
+    created_at: editMode ? editData.created_at : Date.now(),
+    status: editMode ? editData.status: 'draft',
     // Alway calculate subtotal & grandTotal
     subtotal: getInvoiceValue(invoiceData).subtotal,
     grandTotal: getInvoiceValue(invoiceData).grandTotal,

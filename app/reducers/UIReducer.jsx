@@ -2,7 +2,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-  activeTab: 'form',
+  activeTab: 'dashboard',
   notifications: [],
   checkUpdatesMessage: {},
 };

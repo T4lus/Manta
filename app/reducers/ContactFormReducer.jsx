@@ -54,6 +54,7 @@ const initialState = {
               : state.note,
           settings: Object.assign({}, state.settings, {
             editMode: true,
+            editData: action.payload,
           }),
         });
       },

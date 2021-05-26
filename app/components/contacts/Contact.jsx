@@ -34,7 +34,8 @@ class Contact extends PureComponent {
     const { contact } = this.props;
     return (
       <TR>
-        <TD bold>{contact.fullname}</TD>
+        <TD bold>{contact.company}</TD>
+        <TD>{contact.fullname}</TD>
         <TD>{contact.email}</TD>
         <TD>{contact.phone}</TD>
         <TD actions>

@@ -63,7 +63,7 @@ class Form extends PureComponent {
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>
-            { editMode.active
+            { editMode
               ? t('form:header:edit')
               : t('form:header:new')
             }
@@ -73,11 +73,11 @@ class Form extends PureComponent {
               {t('form:header:btns:clear')}
             </Button>
             <Button
-              primary={editMode.active}
-              success={editMode.active === false}
+              primary={editMode}
+              success={editMode === false}
               onClick={saveFormData}
             >
-              {editMode.active
+              {editMode
                 ? t('form:header:btns:update')
                 : t('form:header:btns:save')}
             </Button>

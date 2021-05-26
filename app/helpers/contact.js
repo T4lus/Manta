@@ -17,14 +17,14 @@ function getContactData(ContactFormData) {
         settings,
     } = ContactFormData;
     // Required fields
-    const { editMode } = settings;
+    const { editMode, editData } = settings;
 
     // Return final value
     return Object.assign({}, ContactFormData, {
       // Metadata
-      _id: editMode.active ? editMode.data._id : uuidv4(),
-      _rev: editMode.active ? editMode.data._rev : null,
-      created_at: editMode.active ? editMode.data.created_at : Date.now(),
+      _id: editMode.active ? editData._id : uuidv4(),
+      _rev: editMode.active ? editData._rev : null,
+      created_at: editMode.active ? editData.created_at : Date.now(),
     });
 }
 
