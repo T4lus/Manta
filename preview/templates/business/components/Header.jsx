@@ -103,6 +103,11 @@ function Header({ t, invoice, profile, configs }) {
             <h4>{t('preview:common:billedTo', { lng: language })}</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
+            <p>{recipient.address.line_1}</p>
+            <p>{recipient.address.line_2}</p>
+            <p>{recipient.address.postcode} {recipient.address.city}</p>
+            <p>{recipient.address.state}</p>
+            <p>{recipient.address.country}</p>
             <p>{recipient.email}</p>
             <p>{recipient.phone}</p>
           </Recipient>

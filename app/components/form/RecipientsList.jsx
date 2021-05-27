@@ -45,7 +45,7 @@ export class RecipientsList extends Component {
     const { contacts, selectedContact } = this.props;
     const optionsComponent = contacts.map(contact => (
       <option key={contact._id} value={contact._id}>
-        {contact.company}{contact.fullname ? " - "+contact.fullname : contact.company} ({contact.email})
+        {contact.company}{contact.fullname ? " - "+contact.fullname : ""} ({contact.email})
       </option>
     ));
     return (

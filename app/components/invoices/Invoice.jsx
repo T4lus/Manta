@@ -302,7 +302,7 @@ class Invoice extends PureComponent {
             <Row>
               <Field>
                 <label>{t('invoices:fields:client')}</label>
-                <h2>{recipient.fullname}</h2>
+                <h2>{recipient.company}</h2>
               </Field>
             </Row>
             <Row>
@@ -349,7 +349,7 @@ class Invoice extends PureComponent {
               options={statusActions}
             />
             <Button
-              disabled={invoice.status != 'draft'}
+              //disabled={invoice.status != 'draft'}
               onClick={this.editInvoice}>
               {t('invoices:btns:edit')}
             </Button>
