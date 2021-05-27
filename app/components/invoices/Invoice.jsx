@@ -349,7 +349,7 @@ class Invoice extends PureComponent {
               options={statusActions}
             />
             <Button
-              //disabled={invoice.status != 'draft'}
+              disabled={invoice.status != 'draft'}
               onClick={this.editInvoice}>
               {t('invoices:btns:edit')}
             </Button>
