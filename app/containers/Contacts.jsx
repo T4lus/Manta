@@ -36,7 +36,6 @@ class Contacts extends PureComponent {
 
   closeEditContact() {
     this.setState({ edit : false });
-    console.log('=========== TEST ===========');
   }
 
   editContact(contact) {  

@@ -36,9 +36,9 @@ function InvoiceID({ t, invoiceID, handleInvoiceIDChange }) {
 }
 
 InvoiceID.propTypes = {
-    invoiceID: PropTypes.object.isRequired,
-    handleInvoiceIDChange: PropTypes.func.isRequired,
-    t: PropTypes.func.isRequired,
+  invoiceID: PropTypes.object.isRequired,
+  handleInvoiceIDChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default InvoiceID;
