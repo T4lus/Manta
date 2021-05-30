@@ -148,6 +148,7 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         status: 'draft',
         _id: uuidv4(),
         _rev: null,
+        invoiceID: null,
       })
       return dispatch({
         type: ACTION_TYPES.INVOICE_SAVE,
