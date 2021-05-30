@@ -39,11 +39,11 @@ const StatusBar = styled.div`
   width: 100%;
   height: 6px;
   border-radius: 4px 4px 0 0;
-  ${props => props.status === 'draft' && `background: #ffc107;`}
+  ${props => props.status === 'draft' && `background: #ffc107;`} 
   ${props => props.status === 'pending' && `background: #469FE5;`} 
   ${props => props.status === 'paid' && `background: #6BBB69;`} 
-  ${props => props.status === 'refunded' && `background: #4F555C;`} 
-  ${props => props.status === 'cancelled' && `background: #EC476E;`};
+  ${props => props.status === 'refunded' && `background: #EC476E;`} 
+  ${props => props.status === 'cancelled' && `background: #4F555C;`};
 `;
 
 const Status = styled.div`
@@ -54,8 +54,9 @@ const Status = styled.div`
   ${props => props.status === 'draft' && `color: #ffc107;`} 
   ${props => props.status === 'pending' && `color: #469FE5;`} 
   ${props => props.status === 'paid' && `color: #6BBB69;`} 
-  ${props => props.status === 'refunded' && `color: #4F555C;`} 
-  ${props => props.status === 'cancelled' && `color: #EC476E;`} 
+  ${props => props.status === 'refunded' && `color: #EC476E;`} 
+  ${props => props.status === 'cancelled' && `color: #4F555C;`} 
+  
   span {
     display: flex;
     align-items: center;
