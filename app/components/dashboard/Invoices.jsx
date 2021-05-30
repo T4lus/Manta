@@ -39,7 +39,6 @@ import {
   PageHeaderTitle,
   PageContent,
 } from '../shared/Layout';
-import { Number } from 'globalthis/implementation';
 
 const FlexRadialChart = makeVisFlexible(RadialChart)
 const FlexibleXYPlot = makeVisFlexible(XYPlot);
