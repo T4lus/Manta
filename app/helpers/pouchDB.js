@@ -1,7 +1,9 @@
+const isDev = require('electron-is-dev');
+
 // Setup PouchDB
 const PouchDB = require('pouchdb-browser');
-const contactsDB = new PouchDB('contacts');
-const invoicesDB = new PouchDB('invoices');
+const contactsDB = !isDev ? new PouchDB('contacts') : new PouchDB('dev-contacts');
+const invoicesDB = !isDev ? new PouchDB('invoices') : new PouchDB('dev-invoices');
 
 // Utility
 import { omit } from 'lodash';
