@@ -100,13 +100,15 @@ class Quotes extends PureComponent {
     const refundedInvoices = invoices.filter(invoice => invoice.status === 'refunded');
     const cancelledInvoices = invoices.filter(invoice => invoice.status === 'cancelled');
 
-    const quotes = draftInvoices.map((invoice, index) => (
+    const quotes = draftInvoices.sort(( a , b ) => parseInt(b.subtotal) - parseInt(a.subtotal)).slice(0, 6).map((invoice, index) => {
+      return (
         <tr>
           <th scope="row"><a href="#" onClick={() => this.viewInvoice(invoice)} className="alert-link">#{truncate(invoice._id, {length: 8, omission: ''})}</a></th>
           <td>{invoice.recipient.company}</td>
           <td>{invoice.subtotal}</td>
         </tr>
-    ));
+      )
+    });
 
     return (
       <React.Fragment>
