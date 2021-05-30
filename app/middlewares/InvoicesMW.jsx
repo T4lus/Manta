@@ -208,19 +208,31 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
           getAllDocs('invoices').then(allDocs => {
             let invoiceID = doc.invoiceID;
             let created_at = doc.created_at;
+            let paid_at;
+            let refunded_at;
+            let cancelled_at;
             
             if (doc.status == 'draft') {
               invoiceID = zeroFill(allDocs.filter(invoice => invoice.status != 'draft').length + 1, appConfig.getSync('invoice.invoiceID.padding'));
               invoiceID = appConfig.getSync('invoice.invoiceID.prefix') != 'none' ? moment(Date.now()).format(appConfig.getSync('invoice.invoiceID.prefix')) + invoiceID : invoiceID;
               created_at = Date.now();
             }
+            if (status == 'paid')
+              paid_at = Date.now();
+            if (status == 'refunded')
+              refunded_at = Date.now();
+            if (status == 'cancelled')
+              cancelled_at = Date.now();
 
             dispatch({
               type: ACTION_TYPES.INVOICE_UPDATE,
               payload: Object.assign({}, doc, {
                 invoiceID: invoiceID,
                 status: status,
-                created_at: created_at 
+                created_at: created_at,
+                paid_at: paid_at,
+                refunded_at: refunded_at,
+                cancelled_at: cancelled_at 
               })
             })
 
