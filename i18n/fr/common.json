@@ -19,5 +19,19 @@
   "default": "Valeurs par défaut",
   "saveAsDefault": "Enregistrer comme valeurs par défaut ?",
   "yes": "Oui",
-  "noThanks": "Non, merci"
+  "noThanks": "Non, merci",
+  "months":{
+    "january": "Janvier",
+    "february": "Février",
+    "march": "Mars",
+    "april": "Avril",
+    "may": "Mai",
+    "june": "Juin",
+    "july": "Juillet",
+    "august": "Aout",
+    "september": "Septembre",
+    "october": "Octobre",
+    "november": "November",
+    "december": "Decembre"
+  }
 }
