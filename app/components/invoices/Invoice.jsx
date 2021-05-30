@@ -5,6 +5,7 @@ import { truncate } from 'lodash';
 import styled from 'styled-components';
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
+const isDev = require('electron-is-dev');
 
 // Helper
 import { formatNumber } from '../../../helpers/formatNumber';
@@ -292,7 +293,7 @@ class Invoice extends PureComponent {
               <Button link onClick={this.duplicateInvoice}>
                 <i className="ion-ios-copy" />
               </Button>
-              {invoice.status == 'draft' && (
+              {(invoice.status == 'draft' || isDev) && (
                 <Button link onClick={this.deleteInvoice}>
                   <i className="ion-trash-a" />
                 </Button>
