@@ -11,6 +11,7 @@ function getInvoiceValue(data) {
       }
       return data.discount.amount;
     }
+    return 0;
   }
 
   function calTax(data) {
@@ -23,6 +24,7 @@ function getInvoiceValue(data) {
       }
       return subtotal * data.tax.amount / 100;
     }
+    return 0;
   }
 
   function calTotal() {
