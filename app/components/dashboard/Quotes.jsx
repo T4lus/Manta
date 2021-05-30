@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import { truncate } from 'lodash';
 import styled from 'styled-components';
 const ipc = require('electron').ipcRenderer;
 const moment = require('moment');
@@ -20,15 +21,6 @@ import { calTermDate } from '../../../helpers/date';
 import { getInvoiceValue } from '../../helpers/invoice';
 
 // Components
-import { DiscreteColorLegend, makeVisFlexible, RadialChart } from 'react-vis';
-import {
-  XYPlot,
-  XAxis,
-  YAxis,
-  VerticalGridLines,
-  HorizontalGridLines,
-  VerticalBarSeries,
-}  from 'react-vis';
 import { Row, Field } from '../shared/Part';
 import { Table, THead, TBody, TH, TR } from '../shared/Table';
 import { Section } from '../shared/Section';
@@ -41,21 +33,18 @@ import {
   PageContent,
 } from '../shared/Layout';
 
-const FlexRadialChart = makeVisFlexible(RadialChart)
-const FlexibleXYPlot = makeVisFlexible(XYPlot);
-
 const Wrapper = styled.div`
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
-  margin-top: 10px;
+  margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 4px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 // Component
-class Invoices extends PureComponent {
+class Quotes extends PureComponent {
   constructor(props) {
     super(props);  
   }
@@ -111,28 +100,34 @@ class Invoices extends PureComponent {
     const refundedInvoices = invoices.filter(invoice => invoice.status === 'refunded');
     const cancelledInvoices = invoices.filter(invoice => invoice.status === 'cancelled');
 
+    const quotes = draftInvoices.map((invoice, index) => (
+        <tr>
+          <th scope="row"><a href="#" onClick={() => this.viewInvoice(invoice)} className="alert-link">#{truncate(invoice._id, {length: 8, omission: ''})}</a></th>
+          <td>{invoice.recipient.company}</td>
+          <td>{invoice.subtotal}</td>
+        </tr>
+    ));
+
     return (
       <React.Fragment>
         <Wrapper>
           <div className="row">
             <div className="col-xl-6 col-md-6">
-              <FlexibleXYPlot colorType="literal" margin={{left: 60, top:50}} xType="ordinal" height={300} stackBy="y">
-                <DiscreteColorLegend
-                  style={{position: 'absolute', left: '50px', top: '0px'}}
-                  orientation="horizontal"
-                  items={this.InvoicesLegends}
-                />
-                <VerticalGridLines />
-                <HorizontalGridLines />
-                <XAxis tickFormat={v => MonthAxis[v-1]} />
-                <YAxis tickFormat={tick => numeral(tick).format('0.0a')}/>
-                <VerticalBarSeries label='Draft Invoices' color='#ffc107' data={draftInvoices.map((invoice, index) => ({x:parseInt(moment(invoice.created_at).format('M')), y:(invoice.subtotal - getInvoiceValue(invoice).discount)})).sort(( a , b ) => parseInt(a.x) - parseInt(b.x))} />
-                <VerticalBarSeries label='Pending Invoices' color='#469FE5' data={pendingInvoices.map((invoice, index) => ({x:parseInt(this.calcDueDate(invoice).format('M')), y:(invoice.subtotal - getInvoiceValue(invoice).discount)})).sort(( a , b ) => parseInt(a.x) - parseInt(b.x))} />
-                <VerticalBarSeries label='Paid Invoices' color='#6BBB69' data={paidInvoices.map((invoice, index) => ({x:parseInt(moment(invoice.paid_at).format('M')), y:(invoice.subtotal - getInvoiceValue(invoice).discount)})).sort(( a , b ) => parseInt(a.x) - parseInt(b.x))} />
-                <VerticalBarSeries label='Refunded Invoices' color='#EC476E' data={refundedInvoices.map((invoice, index) => ({x:parseInt(moment(invoice.refunded_at).format('M')), y:(invoice.subtotal - getInvoiceValue(invoice).discount)})).sort(( a , b ) => parseInt(a.x) - parseInt(b.x))} />
-                <VerticalBarSeries label='Cancelled Invoices' color='#4F555C' data={cancelledInvoices.map((invoice, index) => ({x:parseInt(moment(invoice.cancelled_at).format('M')), y:(invoice.subtotal - getInvoiceValue(invoice).discount)})).sort(( a , b ) => parseInt(a.x) - parseInt(b.x))} />
-              </FlexibleXYPlot>
-              
+              <table className="table">
+                <thead>
+                  <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Clients</th>
+                  <th scope="col">Montant</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {quotes}
+                </tbody>
+              </table>
+            </div>
+            <div className="col-xl-6 col-md-6">
+
             </div>
           </div>
         </Wrapper>
@@ -143,7 +138,7 @@ class Invoices extends PureComponent {
 }
 
 // PropTypes
-Invoices.propTypes = {
+Quotes.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
     invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
     dispatch: PropTypes.func.isRequired,
@@ -159,4 +154,4 @@ export default compose(
     connect(mapStateToProps),
     translate(),
     _withFadeInAnimation
-)(Invoices, {});
+)(Quotes, {});

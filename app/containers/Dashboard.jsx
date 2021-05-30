@@ -10,8 +10,10 @@ import { translate } from 'react-i18next';
 
 
 // Components
-
+import Alerts from '../components/dashboard/Alerts'
+import General from '../components/dashboard/General'
 import Invoices from '../components/dashboard/Invoices'
+import Quotes from '../components/dashboard/Quotes'
 
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
@@ -37,7 +39,10 @@ class Dashboard extends PureComponent {
           <PageHeaderTitle>{t('dashboard:header')}</PageHeaderTitle>
         </PageHeader>
         <PageContent bare>
+          <Alerts />
+          <General />
           <Invoices />
+          <Quotes />
         </PageContent>
       </PageWrapper>
     );
