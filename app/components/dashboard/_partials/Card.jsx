@@ -115,7 +115,7 @@ class Card extends PureComponent {
 
     return (
       <div className={this.getCardClass(this.getStatus(data))}>
-        <div class="card-header">{header}</div>
+        <div className="card-header">{header}</div>
         <div className="card-body row">
           <div className="col-9">
             <h5 className="card-title">
@@ -138,9 +138,8 @@ class Card extends PureComponent {
 
 // PropTypes
 Card.propTypes = {
-    header: PropTypes.object.isRequired,
+    header: PropTypes.string.isRequired,
     data: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
 };
 
 export default compose(
