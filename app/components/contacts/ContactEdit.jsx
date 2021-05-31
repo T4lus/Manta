@@ -245,7 +245,8 @@ class ContactEdit extends PureComponent {
             <NoteContent
               cols="50"
               rows="4"
-              value={this.state.note}
+              name="note"
+              value={this.state.note.content}
               onChange={this.handleChange}
               placeholder={t('form:fields:note')}
             />
