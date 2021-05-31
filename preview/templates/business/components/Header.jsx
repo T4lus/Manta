@@ -28,6 +28,15 @@ const Company = styled.div`
   margin-bottom: 1.66667em;
 `;
 
+const CompanyInfo = styled.div`
+  margin-bottom: 0.66667em;
+  font-size: 0.8em;
+`;
+
+const CompanyContact = styled.div`
+  margin-top: 0.66667em;
+`;
+
 const InvoiceInfos = styled.div`
   margin-top:20px;
 `;
@@ -53,11 +62,21 @@ function Header({ t, invoice, profile, configs }) {
       <LeftColumn>
         <Company>
           <h4>{profile.company}</h4>
+          <CompanyInfo>
+            {profile.companyID &&<p>{t('common:fields:companyID')} : {profile.companyID}</p>}
+            { tax && tax.tin && <p>{t('form:fields:tax:id')} : { tax.tin }</p> }
+          </CompanyInfo>
           <p>{profile.fullname}</p>
-          <p>{profile.address}</p>
-          <p>{profile.email}</p>
-          <p>{profile.phone}</p>
-          { tax && <p>Tax ID: { tax.tin }</p> }
+          <p>{profile.address.line_1}</p>
+          <p>{profile.address.line_2}</p>
+          <p>{profile.address.postcode} {profile.address.city}</p>
+          <p>{profile.address.state}</p>
+          <p>{profile.address.country}</p>
+          <CompanyContact>
+            <p>{profile.email}</p>
+            <p>{profile.phone}</p>
+          </CompanyContact>
+          
         </Company>
         <InvoiceInfos>
           <h4>

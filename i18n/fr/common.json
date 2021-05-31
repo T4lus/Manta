@@ -2,6 +2,7 @@
   "fields": {
     "fullname": "Nom et prénom",
     "company": "Société",
+    "companyID": "SIRET",
     "address": "Adresse",
     "email": "Email",
     "phone": "N° de téléphone",

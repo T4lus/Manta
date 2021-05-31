@@ -27,9 +27,20 @@ class Profile extends Component {
   handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({ [name]: value }, () => {
-      this.props.updateSettings('profile', this.state);
-    });
+
+    var parts = name.split('.');
+    if (parts[1])
+    {
+      this.setState( { address: {...this.state.address, [parts[1]]: value } }, () => {
+        this.props.updateSettings('profile', this.state);
+      });
+    }
+    else
+    {
+      this.setState({ [name]: value }, () => {
+        this.props.updateSettings('profile', this.state);
+      });
+    }
   }
 
   handleLogoChange(base64String) {
@@ -54,17 +65,8 @@ class Profile extends Component {
             handleLogoChange={this.handleLogoChange}
           />
         </div>
-        <div className="row">
-          <div className="pageItem col-md-6">
-            <label className="itemLabel">{t('common:fields:fullname')}</label>
-            <input
-              name="fullname"
-              type="text"
-              value={this.state.fullname}
-              onChange={this.handleInputChange}
-            />
-          </div>
 
+        <div className="row">
           <div className="pageItem col-md-6">
             <label className="itemLabel">{t('common:fields:company')}</label>
             <input
@@ -74,25 +76,36 @@ class Profile extends Component {
               onChange={this.handleInputChange}
             />
           </div>
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('common:fields:companyID')}</label>
+            <input
+              name="companyID"
+              type="text"
+              value={this.state.companyID}
+              onChange={this.handleInputChange}
+            />
+          </div>
         </div>
 
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">{t('common:fields:address')}</label>
+            <label className="itemLabel">{t('common:fields:website')}</label>
             <input
-              name="address"
+              name="website"
               type="text"
-              value={this.state.address}
+              value={this.state.website}
               onChange={this.handleInputChange}
             />
           </div>
+        </div>
 
+        <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">{t('common:fields:email')}</label>
+            <label className="itemLabel">{t('common:fields:fullname')}</label>
             <input
-              name="email"
+              name="fullname"
               type="text"
-              value={this.state.email}
+              value={this.state.fullname}
               onChange={this.handleInputChange}
             />
           </div>
@@ -110,15 +123,83 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">{t('common:fields:website')}</label>
+            <label className="itemLabel">{t('common:fields:email')}</label>
             <input
-              name="website"
+              name="email"
               type="text"
-              value={this.state.website}
+              value={this.state.email}
               onChange={this.handleInputChange}
             />
           </div>
         </div>
+
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:line_1')}</label>
+            <input
+              name="address.line_1"
+              type="text"
+              value={this.state.address.line_1}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:line_2')}</label>
+            <input
+              name="address.line_2"
+              type="text"
+              value={this.state.address.line_2}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:postcode')}</label>
+            <input
+              name="address.postcode"
+              type="text"
+              value={this.state.address.postcode}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:city')}</label>
+            <input
+              name="address.city"
+              type="text"
+              value={this.state.address.city}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:state')}</label>
+            <input
+              name="address.state"
+              type="text"
+              value={this.state.address.state}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">{t('contacts:fields:address:country')}</label>
+            <input
+              name="address.country"
+              type="text"
+              value={this.state.address.country}
+              onChange={this.handleInputChange}
+            />
+          </div>
+        </div>
+
       </div>
     );
   }

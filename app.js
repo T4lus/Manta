@@ -195,7 +195,15 @@ function setInitialValues() {
       logo: logoBase64String,
       fullname: 'Manta Ray',
       company: 'Oceanic Preservation Society',
-      address: '336 Bon Air Center #384 Greenbrae, CA 94904',
+      companyID:'',
+      address: {
+        line_1:"336 Bon Air Center",
+        line_2:"#384",
+        postcode:"94904",
+        city:"Greenbrae",
+        state:"CA",
+        country:"United State"
+      },
       email: 'info@opsociety.org',
       phone: '+01 (0) 1-2345-6789',
       website: 'http://www.opsociety.org/',
