@@ -59,14 +59,14 @@ class Form extends PureComponent {
     const { required_fields, open, editMode } = settings;
     // Translation
     const { t } = this.props;
+
+    console.log(savedSettings);
+
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>
-            { editMode
-              ? t('form:header:edit')
-              : t('form:header:new')
-            }
+            {editMode ? t('form:header:edit') : t('form:header:new')}
           </PageHeaderTitle>
           <PageHeaderActions>
             <Button danger onClick={clearForm}>
@@ -77,9 +77,7 @@ class Form extends PureComponent {
               success={editMode === false}
               onClick={saveFormData}
             >
-              {editMode
-                ? t('form:header:btns:update')
-                : t('form:header:btns:save')}
+              {editMode ? t('form:header:btns:update') : t('form:header:btns:save')}
             </Button>
             <Button
               primary
@@ -144,6 +142,7 @@ class Form extends PureComponent {
               t={t}
               note={note}
               updateFieldData={updateFieldData}
+              savedSettings={savedSettings.note}
             />
           )}
         </PageContent>

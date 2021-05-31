@@ -36,6 +36,7 @@ const initialState = {
   },
   // Saved settings, reserve for reference
   savedSettings: {
+    note: invoiceSettings.note,
     tax: invoiceSettings.tax,
     currency: invoiceSettings.currency,
     required_fields: invoiceSettings.required_fields,

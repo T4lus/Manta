@@ -17,6 +17,7 @@
       "noPrefix": "Aucun préfixe"
     },
     "taxSettings": "Paramètres des Taxes",
+    "note":"Remarque par défaut",
     "template": "Modèle",
     "dateFormat": "Format de la Date",
     "pdfExportDir": "Emplacement de sauvegarde du dossier PDF",

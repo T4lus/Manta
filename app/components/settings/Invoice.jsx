@@ -12,6 +12,7 @@ import Fields from './_partials/invoice/Fields';
 import InvoiceID from './_partials/invoice/InvoiceID';
 import Other from './_partials/invoice/Other';
 import Tax from './_partials/invoice/Tax';
+import Note from './_partials/invoice/Note';
 
 // Component
 class Invoice extends Component {
@@ -134,6 +135,7 @@ class Invoice extends Component {
       currency,
       invoiceID,
       tax,
+      note,
       required_fields,
       dateFormat,
     } = this.state;
@@ -160,6 +162,12 @@ class Invoice extends Component {
         key="currency_settings"
         currency={currency}
         handleCurrencyChange={this.handleCurrencyChange}
+        t={t}
+      />,
+      <Note
+        key="default_note"
+        note={note}
+        handleInputChange={this.handleInputChange}
         t={t}
       />,
       <Other

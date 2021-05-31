@@ -243,6 +243,7 @@ function setInitialValues() {
         tax: false,
         note: false,
       },
+      note:'',
     },
   };
 
@@ -307,6 +308,7 @@ function migrateData() {
             tax: false,
             note: false,
           },
+          note:'',
         },
       });
       // Omit old keys

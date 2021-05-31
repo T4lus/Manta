@@ -32,10 +32,12 @@ export class Note extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.note.content === undefined) {
-      this.setState({ content: '' }, () => {
-        this.props.updateFieldData('note', this.state);
-      });
+    if (this.state.content !== this.props.savedSettings) {
+      if (nextProps.note.content === undefined || nextProps.note.content == '') {
+        this.setState({ content: this.props.savedSettings }, () => {
+          this.props.updateFieldData('note', this.state);
+        });
+      }
     }
   }
 
@@ -72,6 +74,7 @@ Note.propTypes = {
   note: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  savedSettings: PropTypes.object.isRequired,
 };
 
 // Export
