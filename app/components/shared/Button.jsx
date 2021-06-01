@@ -19,6 +19,7 @@ const ButtonStyle = styled.button`
   border: 1px solid #e0e1e1;
   text-transform: uppercase;
   letter-spacing: 1px;
+  white-space: nowrap;
   // Block Level Button
   ${props => props.block && `width: 100%;`}
   // Color
@@ -49,6 +50,7 @@ const ButtonStyle = styled.button`
 
 const ButtonLinkStyle = styled.button`
   display: flex;
+  white-space: nowrap;
   align-items: center;
   justify-content: center;
   background: none;

@@ -27,15 +27,86 @@ import {
   PageContent,
 } from '../components/shared/Layout';
 
+import styled from 'styled-components';
+
+const OrderSelect = styled.select`
+  height:100%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 4px 15px;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px solid #e0e1e1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+`;
+
+const OrderButton = styled.button`
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: -1px;
+  font-size: 12px;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid #e0e1e1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  // Block Level Button
+  ${props => props.block && `width: 100%;`}
+  // Color
+  ${props => props.primary &&  `
+    background: #469fe5;
+    color: white;
+  `}
+  ${props => props.success && `
+    background: #6bbb69;
+    color: white;
+  `}
+  ${props => props.danger && `
+    background: #EC476E;
+    color: white;
+  `}
+  // Active state
+  ${props => props.active && `
+    background: #F2F3F4;
+    color: #4F555C;
+  `}
+  // Hover
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    // color: white;
+  }
+  > i {
+    margin: 0!important;
+    font-size: 16px;
+  }
+`;
+
 export class Invoices extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = { filter: null };
+    this.state = { filter: null, order:{direction:false, by:'invoiceID'} };
     this.editInvoice = this.editInvoice.bind(this);
     this.deleteInvoice = this.deleteInvoice.bind(this);
     this.duplicateInvoice = this.duplicateInvoice.bind(this);
     this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
     this.setFilter = this.setFilter.bind(this);
+    this.setOrder = this.setOrder.bind(this);
+    this.orderInvoice = this.orderInvoice.bind(this);
   }
 
   // Load Invoices & add event listeners
@@ -99,12 +170,34 @@ export class Invoices extends PureComponent {
     this.setState({ filter: currentFilter === newFilter ? null : newFilter });
   }
 
+  setOrder(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    
+    if (name === 'by')
+      this.setState({ order: {...this.state.order, by: value }});
+    else
+      this.setState({ order: {...this.state.order, direction: !this.state.order.direction }});
+
+    console.log(this.state.order);
+  }
+
+  orderInvoice(invoiceA, invoiceB) {
+    let a = invoiceA[this.state.order.by];
+    let b = invoiceB[this.state.order.by];
+
+
+
+    return this.state.order.direction ? parseInt(a) - parseInt(b) : parseInt(b) - parseInt(a);
+  }
+
   // Render
   render() {
     const { dateFormat, invoices, t } = this.props;
-    const { filter } = this.state;
+    const { filter, order } = this.state;
     const filteredInvoices = filter ? invoices.filter(invoice => invoice.status === filter) : invoices
-    const invoicesComponent = filteredInvoices.sort(( a , b ) => parseInt(b.invoiceID) - parseInt(a.invoiceID)).map((invoice, index) => (
+    const invoicesComponent = filteredInvoices.sort(this.orderInvoice).map((invoice, index) => (
       <Invoice
         key={invoice._id}
         dateFormat={dateFormat}
@@ -119,6 +212,8 @@ export class Invoices extends PureComponent {
     ));
     // Filter Buttons
     const statuses = ['draft', 'pending', 'paid', 'refunded', 'cancelled'];
+    const orders = ['invoiceID', 'created_at', 'dueDate', 'grandTotal'];
+
     const filterButtons = statuses.map(status => (
       <Button
         key={`${status}-button`}
@@ -130,6 +225,12 @@ export class Invoices extends PureComponent {
       </Button>
     ));
 
+    const ordersOptions = orders.map(order => (
+      <option value={order}>
+        { t(`invoices:order:${order}`) }
+      </option>
+    ));
+
     return (
       <PageWrapper>
         <PageHeader>
@@ -137,6 +238,12 @@ export class Invoices extends PureComponent {
           <PageHeaderActions>
             <i className="ion-funnel" />
             <ButtonsGroup>{ filterButtons }</ButtonsGroup>
+            <OrderButton name="direction" value={!order.direction} onClick={this.setOrder}>
+              {order.direction ? <i className="ion-arrow-down-c" /> : <i className="ion-arrow-up-c" />}
+            </OrderButton>
+            <OrderSelect name="by" onChange={this.setOrder}>
+              {ordersOptions}
+            </OrderSelect>
           </PageHeaderActions>
         </PageHeader>
         <PageContent bare>

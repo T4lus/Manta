@@ -16,6 +16,12 @@
     "refunded": "Remboursée",
     "cancelled": "Annulée"
   },
+  "order":{
+    "invoiceID": "Numero de facture", 
+    "created_at": "Date de création", 
+    "dueDate": "Échéance", 
+    "grandTotal": "Valeur Totale"
+  },
   "btns": {
     "view": "Visualiser",
     "edit": "Modifier",
