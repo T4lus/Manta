@@ -74,7 +74,7 @@ Note.propTypes = {
   note: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
-  savedSettings: PropTypes.object.isRequired,
+  savedSettings: PropTypes.string.isRequired,
 };
 
 // Export

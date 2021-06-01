@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const appConfig = require('electron').remote.require('electron-settings');
+const invoiceSettings = appConfig.getSync('invoice');
+
 import styled from 'styled-components';
 const InvoiceFooter = styled.div`
   flex: none;
@@ -19,12 +22,14 @@ const InvoiceFooter = styled.div`
 // Component
 function Footer({ t, invoice, configs }) {
   const { language, accentColor, customAccentColor  } = configs;
+  const { tax } = invoice;
   return invoice.note ? (
     <InvoiceFooter
       accentColor={accentColor}
       customAccentColor={customAccentColor}
     >
       <h4>{ t('preview:common:notice', {lng: language}) }</h4>
+      {!tax && (<p>{invoiceSettings.tax.noTaxMessage}</p>)}
       <p dangerouslySetInnerHTML={{__html: invoice.note}}></p>
     </InvoiceFooter>
   ) : null;

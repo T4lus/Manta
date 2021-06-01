@@ -41,6 +41,18 @@ function Tax({ t, tax, handleTaxChange }) {
           </select>
         </Field>
       </Row>
+      <Row>
+        <Field>
+          <label className="itemLabel">{t('form:fields:tax:noTaxMessage')}</label>
+          <input
+            name="noTaxMessage"
+            type="text"
+            value={tax.noTaxMessage}
+            onChange={handleTaxChange}
+            placeholder={t('form:fields:tax:noTaxMessage')}
+          />
+        </Field>
+      </Row>
     </Part>,
   ];
 }

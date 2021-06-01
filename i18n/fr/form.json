@@ -61,6 +61,7 @@
     "tax": {
       "name": "Taxe",
       "id": "Numéro de TVA",
+      "noTaxMessage":"Information TVA non applicable",
       "method": "Méthode",
       "reverse": "Autoliquidation"
     },

@@ -40,7 +40,7 @@ class Contact extends PureComponent {
         <TD>{contact.phone}</TD>
         <TD actions>
         <Button link primary onClick={this.editContact}>
-            <i className="ion-android-create" />
+            <i className="ion-edit" />
           </Button>
           <Button link primary onClick={this.newInvoice}>
             <i className="ion-plus-round" />

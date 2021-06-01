@@ -228,6 +228,7 @@ function setInitialValues() {
         tin: '123-456-789',
         method: 'default',
         amount: 0,
+        noTaxMessage:'',
       },
       currency: {
         code: 'USD',
@@ -300,6 +301,7 @@ function migrateData() {
             tin: '123-456-789',
             method: 'default',
             amount: 0,
+            noTaxMessage:'',
           },
           required_fields: {
             dueDate: false,

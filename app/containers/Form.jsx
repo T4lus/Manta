@@ -60,8 +60,6 @@ class Form extends PureComponent {
     // Translation
     const { t } = this.props;
 
-    console.log(savedSettings);
-
     return (
       <PageWrapper>
         <PageHeader>
