@@ -75,7 +75,8 @@ class Card extends PureComponent {
     if (value.current.total == value.last.total)
       return 0;
 
-    let rate = (value.current.total-value.last.total)/value.last.total
+    let rate = ((value.current.total-value.last.total)/value.last.total)*100;
+    rate = Math.round((rate + Number.EPSILON)*100)/100;
     if (rate === Infinity)
       return '∞';
     return rate;
@@ -117,7 +118,7 @@ class Card extends PureComponent {
       <div className={this.getCardClass(this.getStatus(data))}>
         <div className="card-header">{header}</div>
         <div className="card-body row">
-          <div className="col-9">
+          <div className="col-8">
             <h5 className="card-title">
               {data.current.period} : {data.current.total}
             </h5>
@@ -125,7 +126,7 @@ class Card extends PureComponent {
               {data.last.period} : {data.last.total}
             </h6>
           </div>
-          <div className="col-3 align-middle text-center">
+          <div className="col-4 align-middle text-center">
             <Status status={this.getStatus(data)}>
               {this.displayStatus(this.getStatus(data), this.calcGrowthRate(data))}
             </Status>
