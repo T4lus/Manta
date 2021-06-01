@@ -23,8 +23,8 @@ function calTermDate(createdAt, adjustment) {
       break;
     }
   }
-  const paymentTermDate = new Date();
-  return paymentTermDate.setDate(createdDate.getDate() + numberOfDaysToAdd);
+  const paymentTermDate = new Date(createdDate.getFullYear(), createdDate.getMonth(), createdDate.getDate() + numberOfDaysToAdd);
+  return paymentTermDate;
 }
 
 export { calTermDate };
