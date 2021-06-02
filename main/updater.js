@@ -19,7 +19,7 @@ let silentMode = true;
 ipcMain.on('check-for-updates', event => {
   // Turn off silent mode first
   silentMode = false;
-  checkForUpdate();
+  //checkForUpdate();
 });
 
 // Start Download
@@ -75,7 +75,7 @@ autoUpdater.on('update-downloaded', info => {
 function checkForUpdate() {
   // Only check for update in Production
   if (!isDev) {
-    autoUpdater.checkForUpdates();
+    //autoUpdater.checkForUpdates();
   }
 }
 
